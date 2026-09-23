@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Masuk — Kuliner UMKM Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="auth-shell">
+  <div class="auth-side">
+    <a href="index.html" class="brand" style="color:#F7EFDD;font-size:22px">Kuliner<span style="color:var(--turmeric)">UMKM</span></a>
+    <div>
+      <h2>Lapak usahamu <span class="grad-text">menunggu pesanan</span> berikutnya.</h2>
+      <p>Masuk untuk memantau pesanan, memperbarui menu, dan melihat performa usaha kulinermu hari ini.</p>
+    </div>
+  </div>
+  <div class="auth-main">
+    <div class="auth-card">
+      <a href="index.html" class="brand" style="font-size:20px;color:var(--chili)">Kuliner<span style="color:var(--leaf)">UMKM</span></a>
+      <h1>Selamat datang kembali</h1>
+      <div class="sub">Masuk ke akun usaha kulinermu.</div>
+
+      <form onsubmit="event.preventDefault(); window.location.href='dashboard.html';">
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="nama@usahakamu.com" required>
+        </div>
+        <div class="field">
+          <label for="pass">Kata sandi</label>
+          <input type="password" id="pass" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn btn-solid btn-block">Masuk</button>
+      </form>
+
+      <div class="auth-foot">Belum punya lapak? <a href="register.html">Daftar di sini</a></div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
