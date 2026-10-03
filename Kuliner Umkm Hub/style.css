@@ -190,3 +190,104 @@ tr:last-child td{border-bottom:none}
   .stat-row{flex-direction:column}
   .stat{border-right:none;border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:16px}
 }
+
+
+/* ===== Komponen CRUD (halaman Pesanan dan halaman CRUD lain) ===== */
+
+/* Tombol berbentuk <button> */
+button.btn{font-family:inherit;cursor:pointer}
+.btn-danger{background:rgba(255,107,74,.12);color:var(--chili);border-color:rgba(255,107,74,.4)}
+.btn-danger:hover{background:rgba(255,107,74,.22)}
+.btn-sm{padding:6px 14px;font-size:12px}
+.btn:focus-visible,.input:focus-visible{outline:2px solid var(--leaf);outline-offset:2px}
+
+/* Sidebar: tautan Keluar */
+.side nav a.logout{color:var(--chili);margin-top:20px}
+
+/* Toolbar cari + filter */
+.toolbar{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.input{
+  padding:11px 14px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:var(--glass);
+  color:var(--ink);
+  font-size:14px;font-family:inherit;
+}
+.input::placeholder{color:#5C6660}
+.input:focus{outline:none;border-color:var(--leaf);box-shadow:0 0 0 3px rgba(94,232,165,.15)}
+.input.grow{flex:1 1 240px}
+option{background:#0E1310;color:var(--ink)}
+
+/* Tabel */
+.table-scroll{overflow-x:auto}
+.table-scroll table{min-width:640px}
+td.num{font-family:'JetBrains Mono',monospace;white-space:nowrap}
+td.aksi{white-space:nowrap}
+td.aksi .btn{margin-right:6px}
+td.kosong{text-align:center;color:var(--ink-soft);padding:36px 22px}
+.status.cancel{background:rgba(255,107,74,.14);color:var(--chili)}
+
+/* Dialog (modal) */
+dialog{
+  background:var(--bg-2);color:var(--ink);
+  border:1px solid var(--line);border-radius:var(--radius);
+  padding:0;margin:auto;
+  width:calc(100% - 32px);max-width:440px;
+  box-shadow:0 30px 80px -20px rgba(0,0,0,.7);
+}
+dialog::backdrop{background:rgba(0,0,0,.65);backdrop-filter:blur(4px)}
+dialog[open]{animation:pop .16s ease-out}
+@keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){dialog[open]{animation:none}.btn{transition:none}}
+.modal-head{padding:20px 24px;border-bottom:1px solid var(--line)}
+.modal-head h3{font-size:17px}
+.modal-body{padding:22px 24px 6px}
+.modal-body p{color:var(--ink-soft);font-size:14px;margin-bottom:16px}
+.modal-foot{display:flex;justify-content:flex-end;gap:10px;padding:16px 24px 22px}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.total-preview{font-size:14px;color:var(--ink-soft);margin-bottom:6px}
+.total-preview b{font-family:'JetBrains Mono',monospace;color:var(--turmeric);font-weight:600}
+.err{color:var(--chili);font-size:13px;min-height:20px;margin-bottom:6px}
+
+/* Responsive: sidebar jadi menu horizontal di atas (menggantikan display:none di style.css) */
+@media(max-width:860px){
+  .dash{flex-direction:column}
+  .side{
+    display:flex;align-items:center;gap:12px;
+    width:100%;padding:12px 16px;
+    border-right:none;border-bottom:1px solid var(--line);
+    overflow-x:auto;
+  }
+  .side .brand{margin:0;padding:0;flex:none}
+  .side nav{display:flex;gap:4px}
+  .side nav a{white-space:nowrap;margin:0;flex:none}
+  .side nav a.logout{margin-top:0}
+  .main{padding:24px 18px}
+  .dash-head{flex-direction:column;align-items:flex-start;gap:16px}
+}
+@media(max-width:480px){
+  .kpis{grid-template-columns:1fr}
+  .field-row{grid-template-columns:1fr}
+  .modal-foot{flex-direction:column-reverse}
+  .modal-foot .btn{width:100%;text-align:center}
+  .toolbar .input{width:100%}
+}
+
+/* ===== Modal tanpa JavaScript (dibuka dengan :target, mis. href="#tambah") ===== */
+.modal{
+  position:fixed;inset:0;z-index:50;
+  display:none;align-items:center;justify-content:center;
+  padding:16px;
+  background:rgba(0,0,0,.65);
+  backdrop-filter:blur(4px);
+}
+.modal:target{display:flex}
+.modal-bg{position:absolute;inset:0}
+.modal-box{
+  position:relative;z-index:1;
+  width:100%;max-width:440px;
+  background:var(--bg-2);color:var(--ink);
+  border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:0 30px 80px -20px rgba(0,0,0,.7);
+}
