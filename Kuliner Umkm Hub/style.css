@@ -291,3 +291,19 @@ dialog[open]{animation:pop .16s ease-out}
   border:1px solid var(--line);border-radius:var(--radius);
   box-shadow:0 30px 80px -20px rgba(0,0,0,.7);
 }
+
+/* ===== Perbaikan responsive (hasil pemeriksaan) ===== */
+
+/* Navbar landing page di layar kecil: sembunyikan tautan, perkecil tombol */
+@media(max-width:640px){.nav-links{display:none}}
+@media(max-width:520px){
+  .nav .wrap{padding:0 16px;gap:8px}
+  .nav .wrap>div{gap:8px!important}
+  .nav .brand{font-size:17px}
+  .nav .btn{padding:8px 12px;font-size:12.5px;white-space:nowrap}
+}
+
+/* Tabel langsung di dalam .table-card (dashboard.html) bisa digeser ke samping */
+.table-card{overflow-x:auto}
+.table-card>table{min-width:480px}
+.table-card h3{position:sticky;left:0}
