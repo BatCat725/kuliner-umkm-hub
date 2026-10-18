@@ -24,7 +24,7 @@
       <h1>Selamat datang kembali</h1>
       <div class="sub">Masuk ke akun usaha kulinermu.</div>
 
-      <form onsubmit="event.preventDefault(); window.location.href='dashboard.html';">
+      <form id="formLogin" novalidate>
         <div class="field">
           <label for="email">Email</label>
           <input type="email" id="email" placeholder="nama@usahakamu.com" required>
@@ -33,6 +33,9 @@
           <label for="pass">Kata sandi</label>
           <input type="password" id="pass" placeholder="••••••••" required>
         </div>
+        <label style="display:flex;align-items:center;gap:8px;font-size:13px;margin:0 0 16px;cursor:pointer">
+          <input type="checkbox" id="ingat" style="display:inline-block;width:auto;margin:0"> Ingat email saya
+        </label>
         <button type="submit" class="btn btn-solid btn-block">Masuk</button>
       </form>
 
@@ -41,5 +44,7 @@
   </div>
 </div>
 
+<script src="app.js"></script>
+<script src="auth.js"></script>
 </body>
 </html>
