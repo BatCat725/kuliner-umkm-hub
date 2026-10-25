@@ -1,0 +1,132 @@
+<?php
+session_start();
+// Halaman ini hanya untuk pengguna yang sudah punya SESSION
+if (empty($_SESSION['nama'])) {
+    header('Location: login.php');
+    exit;
+}
+?>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pesanan — Kuliner UMKM Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>button.btn{font-family:inherit;cursor:pointer}</style>
+</head>
+<body>
+
+<div class="dash">
+  <aside class="side">
+    <a href="index.php" class="brand" style="color:var(--chili)">Kuliner<span style="color:var(--leaf)">UMKM</span></a>
+    <div style="padding:0 12px 18px;font-size:12px;color:var(--ink-soft)">Masuk sebagai<br><b style="color:var(--leaf)"><?= htmlspecialchars($_SESSION['nama']) ?></b></div>
+    <nav>
+      <a href="dashboard.php">Ringkasan</a>
+      <a href="pesanan.php" class="active">Pesanan</a>
+      <a href="produk.php">Produk Saya</a>
+      <a href="#">Pelanggan</a>
+      <a href="#">Pengaturan Lapak</a>
+      <a href="login.php?logout=1" class="logout">Keluar</a>
+    </nav>
+  </aside>
+
+  <main class="main">
+    <div class="dash-head">
+      <div>
+        <h1>Pesanan</h1>
+        <p>Catat, ubah, dan pantau pesanan yang masuk ke lapakmu.</p>
+      </div>
+      <button type="button" class="btn btn-solid" id="btnTambah">+ Tambah Pesanan</button>
+    </div>
+
+    <div class="kpis">
+      <div class="kpi"><span>Total pesanan</span><b id="kTotal">0</b></div>
+      <div class="kpi"><span>Diproses</span><b id="kProses">0</b></div>
+      <div class="kpi"><span>Selesai</span><b id="kSelesai">0</b></div>
+      <div class="kpi"><span>Pendapatan selesai</span><b id="kUang">Rp0</b></div>
+    </div>
+
+    <div class="toolbar">
+      <input type="search" id="cari" class="input grow" placeholder="Cari pemesan atau produk (tekan / untuk fokus)" aria-label="Cari pesanan">
+      <select id="filterStatus" class="input" aria-label="Filter status">
+        <option value="">Semua status</option>
+        <option>Diproses</option>
+        <option>Selesai</option>
+        <option>Dibatalkan</option>
+      </select>
+    </div>
+
+    <div class="table-card">
+      <h3 id="judulTabel">Daftar pesanan</h3>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Pemesan</th><th>Produk</th><th>Jumlah</th><th>Total</th><th>Status</th><th>Aksi</th></tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Form tambah / ubah -->
+<dialog id="dlgForm">
+  <form id="form" novalidate>
+    <div class="modal-head"><h3 id="formJudul">Tambah pesanan</h3></div>
+    <div class="modal-body">
+      <div class="field">
+        <label for="fPemesan">Pemesan</label>
+        <input type="text" id="fPemesan" placeholder="Contoh: Rina W." maxlength="60">
+      </div>
+      <div class="field">
+        <label for="fProduk">Produk</label>
+        <input type="text" id="fProduk" placeholder="Contoh: Nasi Kotak Ayam" maxlength="80">
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="fJumlah">Jumlah</label>
+          <input type="number" id="fJumlah" min="1" step="1" value="1">
+        </div>
+        <div class="field">
+          <label for="fHarga">Harga satuan (Rp)</label>
+          <input type="number" id="fHarga" min="0" step="500" value="15000">
+        </div>
+      </div>
+      <div class="field">
+        <label for="fStatus">Status</label>
+        <select id="fStatus">
+          <option>Diproses</option>
+          <option>Selesai</option>
+          <option>Dibatalkan</option>
+        </select>
+      </div>
+      <div class="total-preview">Total: <b id="fTotal">Rp0</b></div>
+      <div class="err" id="formError" role="alert"></div>
+    </div>
+    <div class="modal-foot">
+      <button type="button" class="btn btn-ghost" id="btnBatal">Batal</button>
+      <button type="submit" class="btn btn-solid" id="btnSimpan">Simpan pesanan</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- Konfirmasi hapus -->
+<dialog id="dlgHapus">
+  <div class="modal-head"><h3>Hapus pesanan?</h3></div>
+  <div class="modal-body">
+    <p id="hapusTeks"></p>
+  </div>
+  <div class="modal-foot">
+    <button type="button" class="btn btn-ghost" id="btnHapusBatal">Batal</button>
+    <button type="button" class="btn btn-danger" id="btnHapusYa">Hapus pesanan</button>
+  </div>
+</dialog>
+
+<script src="app.js"></script>
+<script src="pesanan.js"></script>
+</body>
+</html>
